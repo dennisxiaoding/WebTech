@@ -1,0 +1,79 @@
+# Platform :
+# python : 2.7.10
+# django : 1.8.4
+
+#Create Project
+$ django-admin startproject DjangoSample
+
+#The development server
+$ python manage.py runserver
+
+#Database
+  setting.py
+  # Some kinds of db settings
+  [ENGINE]
+  django.db.backends.sqlite3
+  django.db.backends.postgresql_psycopg2
+  django.db.backends.mysql
+  django.db.backends.oracle
+  [NAME]
+  [USER]
+  [PASSWORD]
+  [HOST]
+  
+#Apps
+  #这个概念比较喜欢，独立的模块复用更显得合理
+  $ python manage.py startapp dog
+  # [INSTALLED_APPS] 在这个里面注册新建的app模块dog
+  
+#Models
+#1. models.py
+##############################################
+from django.db import models
+
+class Dog(models.Model):
+    name = models.CharField(max_length=20)
+    age = models.IntegerField()
+##############################################  
+#2. 
+$ python manage.py makemigrations dog 
+##############################################
+#3.
+$ python manage.py migrate
+#4. Operations similar to hibernate(Java)
+  # insert or update
+  dog = Dog()
+  dog.name = 'Dick'
+  dog.age = 1
+  dog.save()
+  
+  # query
+  Dog.objects.filter(id=1)
+  
+  for dog in Dog.objects.all():
+    print 'dog.name = %s dog.age = %d' % (dog.name, dog.age)
+  
+  # delete
+  dog.delete()
+  
+  #TODO How to handle the 'join' operation??  Find the answer later.
+  
+#Views
+
+#useful tips
+ # admin user
+ $ python manage.py createsuperuser
+ # shell to test database
+ $ python manage.py shell
+ # register models(admin.py)
+   from django.contrib import admin
+   from .models import Dog
+
+   admin.site.register(Dog)
+ 
+  
+    
+ 
+  
+
+ 
