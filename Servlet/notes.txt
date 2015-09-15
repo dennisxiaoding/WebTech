@@ -1,2 +1,2 @@
-1. Servlet 3.0的异步处理的例子
-   测试: http://127.0.0.1:8080/hello/AsyncServletSample
+1. Servlet 3.0 鐨勫紓姝ュ鐞嗙殑渚嬪瓙
+   娴嬭瘯: http://127.0.0.1:8080/hello/AsyncServletSample
