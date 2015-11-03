@@ -93,17 +93,30 @@ for td in tds:
 
 stockfile.close()
 szstockroot = None
-
-log.info("=====================STOCK NUMBER GENERATED===============================")
+log.info("=====================STOCK CODE LIST GENERATED===============================")
 
      
 ###########################################################
-# STEP 2. Get stock normal info
+# STEP 2. Get stock trade simple info
+###########################################################
+stockfile = open(STOCK_LIST_FILE_NAME, "r")
+if stockfile is None:
+    sys.exit(1)
+    log.error("Can not open the stock.list file!")
+
+for stockcode in stockfile.readlines():
+    prefix = "0"
+    if not stockcode.startswith("6"):
+        prefix = "1"
+    stocktradeurl = STOCK_TRADE_DAILY_INFO_URL.format(prefix + stockcode.strip(), "19900101", "20151103")
+    urllib.urlretrieve(stocktradeurl, "stocktradeinfo/" + stockcode.strip() + ".info")
+    log.info("Trade info about " + stockcode.strip() + " got.")
+
+stockfile.close()
+log.info("=====================STOCK TRADE INFO GENERATED===============================")
+
+###########################################################
+# STEP 3. Get stock trade info detail 
 ###########################################################
 
-
-
-###########################################################
-# STEP 3. Get stock normal info
-###########################################################
 
